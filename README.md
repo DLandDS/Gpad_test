@@ -1,2 +1,3 @@
 # Gpad_test
-Work in Progress
+
+Xbox Controller testing program.
