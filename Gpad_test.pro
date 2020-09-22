@@ -9,3 +9,6 @@ SOURCES += \
 LIBS += -L /usr/lib/ -lSDL2main -lSDL2
 INCLUDEPATH += /usr/include/SDL2/
 
+DISTFILES += \
+    README.md
+

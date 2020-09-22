@@ -5,21 +5,18 @@ using namespace std;
 
 SDL_Joystick *gamepad;
 SDL_Event *even;
-int joy;
+int joy, indexJoysticks;
 
 
 int checkJoyStick(){
-    int indexJoysticks, i;
-    indexJoysticks = SDL_NumJoysticks();
-    printf("%d joysticks found\n", indexJoysticks);
+    int i;
     if (indexJoysticks == 1) {
-        printf("%s\n", SDL_JoystickName(SDL_JoystickOpen(0)));
         return 0;
     } else {
         for(i = 0; i < indexJoysticks; i++)
         {
             printf("Select your gamepad");
-            printf("%d. %s\n", i+1, SDL_JoystickName(SDL_JoystickOpen(i)));
+            printf("Name: %s\n", SDL_JoystickNameForIndex(i));
         }
     cin>>i;
     return i-1;
@@ -40,10 +37,13 @@ int main()
         SDL_Log("Program Started");
     }
     if (SDL_NumJoysticks() > 0) {
+        printf("%d joysticks found\n", indexJoysticks = SDL_NumJoysticks());
         if ((gamepad = SDL_JoystickOpen(joy = checkJoyStick()))){
             SDL_JoystickEventState(SDL_ENABLE);
             SDL_Log("Connected");
-
+            SDL_Log("%s\n", SDL_JoystickName(gamepad));
+            SDL_Log("Number of Axes: %d\n", SDL_JoystickNumAxes(gamepad));
+            SDL_Log("Number of Buttons: %d\n", SDL_JoystickNumButtons(gamepad));
         } else {
             SDL_Log("Couldn't find Joystick\n");
             SDL_Quit();
